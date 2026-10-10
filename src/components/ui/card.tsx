@@ -4,18 +4,18 @@ import { cn } from "@/lib/utils";
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("rounded-lg border border-zinc-200 bg-white shadow-sm", className)}
+      className={cn("rounded-lg border border-border bg-card shadow-sm", className)}
       {...props}
     />
   );
 }
 
 export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("border-b border-zinc-100 px-5 py-4", className)} {...props} />;
+  return <div className={cn("border-b border-border px-5 py-4", className)} {...props} />;
 }
 
 export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-base font-semibold text-zinc-900", className)} {...props} />;
+  return <h3 className={cn("text-base font-semibold text-foreground", className)} {...props} />;
 }
 
 export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
@@ -30,10 +30,10 @@ export function Badge({
   color?: "zinc" | "green" | "red" | "blue" | "amber";
 }) {
   const colors = {
-    zinc: "bg-zinc-100 text-zinc-700",
-    green: "bg-green-100 text-green-700",
-    red: "bg-red-100 text-red-700",
-    blue: "bg-blue-100 text-blue-700",
+    zinc: "bg-muted text-foreground",
+    green: "bg-green-100 text-green-800",
+    red: "bg-destructive/10 text-destructive",
+    blue: "bg-primary/10 text-primary",
     amber: "bg-amber-100 text-amber-700",
   };
   return (

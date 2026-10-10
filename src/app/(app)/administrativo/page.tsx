@@ -52,9 +52,9 @@ export default function AdministrativoPage() {
         {sections.map((section) => (
           <Link key={section.href} href={section.href}>
             <Card className="h-full p-5 transition-shadow hover:shadow-md">
-              <section.icon className="mb-3 h-6 w-6 text-blue-600" />
-              <p className="font-semibold text-zinc-900">{section.title}</p>
-              <p className="mt-1 text-sm text-zinc-500">{section.description}</p>
+              <section.icon className="mb-3 h-6 w-6 text-primary" />
+              <p className="font-semibold text-foreground">{section.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{section.description}</p>
             </Card>
           </Link>
         ))}

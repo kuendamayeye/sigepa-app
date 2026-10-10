@@ -14,8 +14,8 @@ import { formatDate } from "@/lib/utils";
 function Info({ label, value }: { label: string; value?: string | boolean }) {
   return (
     <div>
-      <p className="text-xs text-zinc-500">{label}</p>
-      <p className="text-sm font-medium text-zinc-800">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className="text-sm font-medium text-foreground">
         {typeof value === "boolean" ? (value ? "Sim" : "Não") : value || "—"}
       </p>
     </div>

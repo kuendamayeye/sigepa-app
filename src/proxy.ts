@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * O cookie é apenas um indicador de UX — a autorização real é feita pelo
  * backend com JWT. A checagem de role aqui evita exibir telas indevidas.
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const hasSession = request.cookies.get("sigepa_session")?.value === "1";
   const role = request.cookies.get("sigepa_role")?.value;

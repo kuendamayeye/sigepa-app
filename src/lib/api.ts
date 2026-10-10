@@ -1,11 +1,17 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { clearSession, getAccessToken, getRefreshToken, saveTokens } from "@/lib/session";
+import { DEMO_MODE, demoAdapter } from "@/lib/demo";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3333/api/v1",
   timeout: 15000,
   headers: { "Content-Type": "application/json" },
 });
+
+// Modo demonstração: responde sem backend (ver src/lib/demo.ts).
+if (DEMO_MODE) {
+  api.defaults.adapter = demoAdapter;
+}
 
 // Anexa o token de acesso em todas as requisições.
 api.interceptors.request.use((config) => {

@@ -33,20 +33,20 @@ export function Modal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className={`relative w-full ${maxWidth} rounded-lg bg-white shadow-xl`}>
-        <div className="flex items-center justify-between border-b border-zinc-100 px-5 py-4">
-          <h2 className="text-base font-semibold text-zinc-900">{title}</h2>
+      <div className={`relative w-full ${maxWidth} rounded-lg bg-card shadow-xl`}>
+        <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <h2 className="text-base font-semibold text-foreground">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Fechar"
-            className="rounded p-1 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600"
+            className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-muted-foreground"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
         <div className="px-5 py-4">{children}</div>
         {footer && (
-          <div className="flex justify-end gap-2 border-t border-zinc-100 px-5 py-4">
+          <div className="flex justify-end gap-2 border-t border-border px-5 py-4">
             {footer}
           </div>
         )}
@@ -89,7 +89,7 @@ export function ConfirmDialog({
         </>
       }
     >
-      <p className="text-sm text-zinc-600">{message}</p>
+      <p className="text-sm text-muted-foreground">{message}</p>
     </Modal>
   );
 }

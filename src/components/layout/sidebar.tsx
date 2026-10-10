@@ -3,7 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import {
+  Boxes,
+  Briefcase,
+  GraduationCap,
+  Languages,
+  LayoutDashboard,
+  Layers,
+  ListChecks,
+  Menu,
+  MessageSquare,
+  ScrollText,
+  Settings,
+  Tags,
+  UserCog,
+  UserPlus,
+  Users,
+  X,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/utils";
 import type { Permission } from "@/lib/permissions";
@@ -11,6 +29,7 @@ import type { Permission } from "@/lib/permissions";
 interface MenuItem {
   href: string;
   label: string;
+  icon: LucideIcon;
   permission?: Permission;
 }
 
@@ -23,45 +42,74 @@ interface MenuGroup {
 const MENU: MenuGroup[] = [
   {
     label: "Geral",
-    items: [{ href: "/dashboard", label: "Dashboard", permission: "dashboard.view" }],
+    items: [
+      {
+        href: "/dashboard",
+        label: "Dashboard",
+        icon: LayoutDashboard,
+        permission: "dashboard.view",
+      },
+    ],
   },
   {
     label: "Membros",
     permission: "members.view",
     items: [
-      { href: "/membros", label: "Listagem" },
-      { href: "/membros/novo", label: "Novo membro", permission: "members.create" },
+      { href: "/membros", label: "Listagem", icon: Users },
+      {
+        href: "/membros/novo",
+        label: "Novo membro",
+        icon: UserPlus,
+        permission: "members.create",
+      },
     ],
   },
   {
     label: "Órgãos",
     permission: "bodies.view",
     items: [
-      { href: "/orgaos", label: "Órgãos" },
-      { href: "/orgaos/tipos", label: "Tipos de órgão" },
-      { href: "/orgaos/funcoes", label: "Funções" },
+      { href: "/orgaos", label: "Órgãos", icon: ScrollText },
+      { href: "/orgaos/tipos", label: "Tipos de órgão", icon: Tags },
+      { href: "/orgaos/funcoes", label: "Funções", icon: Briefcase },
     ],
   },
   {
     label: "Estruturas",
     permission: "structures.view",
     items: [
-      { href: "/estruturas", label: "Visão geral" },
-      { href: "/estruturas/nucleo", label: "Núcleos" },
-      { href: "/estruturas/comites-locais", label: "Comitês locais" },
-      { href: "/estruturas/comites-sectoriais", label: "Comitês sectoriais" },
-      { href: "/estruturas/comites-zonais", label: "Comitês zonais" },
+      { href: "/estruturas", label: "Visão geral", icon: Layers },
+      { href: "/estruturas/nucleo", label: "Núcleos", icon: Boxes },
+      {
+        href: "/estruturas/comites-locais",
+        label: "Comitês locais",
+        icon: ListChecks,
+      },
+      {
+        href: "/estruturas/comites-sectoriais",
+        label: "Comitês sectoriais",
+        icon: ListChecks,
+      },
+      {
+        href: "/estruturas/comites-zonais",
+        label: "Comitês zonais",
+        icon: ListChecks,
+      },
     ],
   },
   {
     label: "Administrativo",
     permission: "admin.view",
     items: [
-      { href: "/administrativo", label: "Visão geral" },
-      { href: "/administrativo/usuarios", label: "Usuários", permission: "users.manage" },
-      { href: "/administrativo/idiomas", label: "Idiomas" },
-      { href: "/administrativo/linguas", label: "Línguas" },
-      { href: "/administrativo/formacoes", label: "Formações" },
+      { href: "/administrativo", label: "Visão geral", icon: Settings },
+      {
+        href: "/administrativo/usuarios",
+        label: "Usuários",
+        icon: UserCog,
+        permission: "users.manage",
+      },
+      { href: "/administrativo/idiomas", label: "Idiomas", icon: Languages },
+      { href: "/administrativo/linguas", label: "Línguas", icon: MessageSquare },
+      { href: "/administrativo/formacoes", label: "Formações", icon: GraduationCap },
     ],
   },
 ];
@@ -75,7 +123,7 @@ export function Sidebar() {
     <>
       {/* Botão mobile */}
       <button
-        className="fixed bottom-4 right-4 z-40 rounded-full bg-blue-600 p-3 text-white shadow-lg md:hidden"
+        className="fixed bottom-4 right-4 z-40 rounded-full bg-primary text-primary-foreground p-3 text-white shadow-lg md:hidden"
         onClick={() => setOpen((v) => !v)}
         aria-label="Abrir menu"
       >
@@ -84,19 +132,19 @@ export function Sidebar() {
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto border-r border-zinc-200 bg-white pt-16 md:pt-0",
+          "fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto border-r bg-card pt-16 md:pt-0",
           "transition-transform md:static md:translate-x-0 md:pt-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <nav className="space-y-4 p-4">
+        <nav className="px-3 pb-6 pt-4">
           {MENU.filter((group) => !group.permission || hasPermission(group.permission)).map(
             (group) => (
               <div key={group.label}>
-                <p className="mb-1 px-2 text-xs font-semibold uppercase text-zinc-400">
+                <p className="px-3 pb-2 pt-3 text-xs font-semibold uppercase text-muted-foreground">
                   {group.label}
                 </p>
-                <ul className="space-y-0.5">
+                <ul className="space-y-1">
                   {group.items
                     .filter((item) => !item.permission || hasPermission(item.permission))
                     .map((item) => {
@@ -110,8 +158,8 @@ export function Sidebar() {
                             className={cn(
                               "block rounded-md px-2 py-1.5 text-sm transition-colors",
                               active
-                                ? "bg-blue-50 font-medium text-blue-700"
-                                : "text-zinc-600 hover:bg-zinc-100"
+                                ? "bg-primary/10 font-medium text-primary"
+                                : "text-muted-foreground hover:bg-muted"
                             )}
                           >
                             {item.label}

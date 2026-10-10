@@ -104,7 +104,7 @@ export default function MembrosPage() {
             <TBody>
               {rows.map((m) => (
                 <TR key={m.id}>
-                  <TD className="font-medium text-zinc-900">{m.fullName}</TD>
+                  <TD className="font-medium text-foreground">{m.fullName}</TD>
                   <TD>{m.bi || "—"}</TD>
                   <TD>{m.phoneNumber || "—"}</TD>
                   <TD>

@@ -261,10 +261,10 @@ export function CrudListPage<T extends Identifiable>({
 
             if (field.type === "checkbox") {
               return (
-                <label key={field.name} className="flex items-center gap-2 text-sm text-zinc-700">
+                <label key={field.name} className="flex items-center gap-2 text-sm text-foreground">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 rounded border-zinc-300"
+                    className="h-4 w-4 rounded border-input"
                     {...register(field.name)}
                   />
                   {field.label}
